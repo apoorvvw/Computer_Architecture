@@ -73,22 +73,31 @@ program test(
     // Read instruction
     cif0.iREN = 1'b1;
     cif0.iaddr = 32'h999;
-    #(2 * memory_control_tb.PERIOD);
-    cif0.iREN = 1'b0;
+    #(3 * memory_control_tb.PERIOD);
+    // cif0.iREN = 1'b0;
 
     // Write Data
     cif0.dWEN = 1'b1;
     cif0.daddr = 32'hC00;
     cif0.dstore = 32'hdeadbeef;
-    #(2 * memory_control_tb.PERIOD);
+    #(3 * memory_control_tb.PERIOD);
 
     // Read Data
     cif0.dWEN = 1'b0;
     cif0.dREN = 1'b1;
     cif0.daddr = 32'hC00;
-    #(2 * memory_control_tb.PERIOD);    
-    $finish;
+    #(3 * memory_control_tb.PERIOD);    
+    cif0.dREN = 1'b0;
+    
+    // Read instruction
+    cif0.iREN = 1'b1;
+    cif0.iaddr = 32'h999;
+    #(6 * memory_control_tb.PERIOD);
+    // cif0.iREN = 1'b0;
 
+
+    // dump_memory();
+    $finish;
   end
   task automatic dump_memory();
     string filename = "memcpu.hex";
