@@ -53,6 +53,7 @@ program test(
     output logic nRST,
     register_file_if.rf rfif
   );
+
   int i; // Loop control variable
   int isDone; // flag
   initial begin
