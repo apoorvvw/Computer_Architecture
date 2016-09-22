@@ -20,12 +20,14 @@ module register_file (
 
   word_t register [31:0];
 
-  always_ff @(negedge CLK , negedge nRST) begin 
+  always_ff @(posedge CLK , negedge nRST) begin 
     if(~nRST) begin
       register <= '{default:'0};
     end else if (rfif.WEN) begin
       if (rfif.wsel != 0)
         register[rfif.wsel] <= rfif.wdat;
+      else
+        register[rfif.wsel] <= 32'b0; // New addition Sept 16, 11:02 AM 
     end
   end
 

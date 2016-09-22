@@ -26,7 +26,7 @@ always_comb begin
 		end // ALU_SLL:
 		
 		ALU_SRL: begin
-			aluif.v_flag = 1'b0;
+			aluif.porto = aluif.porta >> aluif.portb; // Doesn't Sign extends
 		end // ALU_SRL:
 		
 		ALU_ADD: begin
